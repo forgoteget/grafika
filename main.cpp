@@ -4,13 +4,30 @@
 #include <GL/glu.h>
 #include <GL/freeglut.h>
 
+int colors[4][3]={{0,0,0},{255,255,255},{0,0,255},{255,0,0}};
+int red=255, green=0, blue=0,Currentkey, i=0, timeCount=0;
+const int Qkey = 113;
+
 void Simulation(int value){
+	if(Currentkey == Qkey){
+		timeCount+=20;
+		if(timeCount == 2000){
+			timeCount = 0;
+			i++;
+			red = colors[i-1][0];
+			green = colors[i-1][1];
+			blue = colors[i-1][2];
+			if(i==5){
+				i = 0;
+			}
+		}
+	}
 	glutPostRedisplay();
 	glutTimerFunc(20, Simulation, 0);
 }
 
 void Reshape(int w, int h){
-	glViewport(0,0,w,h);
+	glViewport(0,0,(GLsizei)w,(GLsizei)h);
 	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -27,7 +44,7 @@ void Display(void){
 	glLoadIdentity();
 	gluLookAt(5,5,7.5,0,0,0,0,1,0);
 	
-	glColor3f(1.0, 0.0, 0.0);
+	glColor3f(red, green, blue);
 	glutWireTeapot(1.0);
 	
 	glutSwapBuffers();
@@ -35,6 +52,7 @@ void Display(void){
 
 void KeyboardFunc(unsigned char key, int x, int y){
 	printf("Key code is %i\n", (unsigned int) key);
+	Currentkey = key;
 }
 
 int main(int argc, char* argv[]){
@@ -60,6 +78,7 @@ int main(int argc, char* argv[]){
 	glutKeyboardFunc(KeyboardFunc);
 	
 	glutMainLoop();
+	
 	
 	return 0;
 }
