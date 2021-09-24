@@ -5,19 +5,19 @@
 #include <GL/freeglut.h>
 
 int colors[4][3]={{0,0,0},{255,255,255},{0,0,255},{255,0,0}};
-int red=255, green=0, blue=0,Currentkey, i=0, timeCount=0;
+int red=147, green=112, blue=219,Currentkey, i=0, timeCount=0;
 const int Qkey = 113;
 
 void Simulation(int value){
 	if(Currentkey == Qkey){
 		timeCount+=20;
-		if(timeCount == 2000){
+		if(timeCount == 1200){
 			timeCount = 0;
+			red = colors[i][0];
+			green = colors[i][1];
+			blue = colors[i][2];
 			i++;
-			red = colors[i-1][0];
-			green = colors[i-1][1];
-			blue = colors[i-1][2];
-			if(i==5){
+			if(i==4){
 				i = 0;
 			}
 		}
@@ -35,7 +35,7 @@ void Reshape(int w, int h){
 }
 
 void Display(void){
-	glClearColor(0.22, 0.88, 0.11, 1.0);
+	glClearColor(0.22, 0.88, 0.11, 0.5);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	glEnable(GL_DEPTH_TEST);
@@ -44,7 +44,7 @@ void Display(void){
 	glLoadIdentity();
 	gluLookAt(5,5,7.5,0,0,0,0,1,0);
 	
-	glColor3f(red, green, blue);
+	glColor3ub(red, green, blue);
 	glutWireTeapot(1.0);
 	
 	glutSwapBuffers();
