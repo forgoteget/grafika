@@ -8,10 +8,10 @@ OBJ      = main.o
 LINKOBJ  = main.o
 LIBS     = -L"C:/all/Dev-Cpp/MinGW64/lib" -L"C:/all/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -L"C:/Users/7/Desktop/ucheba/графика/freeglut/lib/x64" -static-libgcc -lopengl32 -lfreeglut -lglu32
 INCS     = -I"C:/all/Dev-Cpp/MinGW64/include" -I"C:/all/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/all/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
-CXXINCS  = -I"C:/all/Dev-Cpp/MinGW64/include" -I"C:/all/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/all/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/all/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Users/7/Desktop/ucheba/графика/freeglut/include"
+CXXINCS  = -I"C:/all/Dev-Cpp/MinGW64/include" -I"C:/all/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/all/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/all/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Users/7/Desktop/ucheba/графика/freeglut/include" -I"C:/Users/7/Desktop/ucheba/графика/glm-0.9.9.8/glm"
 BIN      = FIRSTPROJECT.exe
-CXXFLAGS = $(CXXINCS) 
-CFLAGS   = $(INCS) 
+CXXFLAGS = $(CXXINCS) -std=c++11
+CFLAGS   = $(INCS) -std=c++11
 RM       = rm.exe -f
 
 .PHONY: all all-before all-after clean clean-custom
