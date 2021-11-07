@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = 1.o GraphicObject.o
-LINKOBJ  = 1.o GraphicObject.o
+OBJ      = main.o GraphicObject.o Camera.o
+LINKOBJ  = main.o GraphicObject.o Camera.o
 LIBS     = -L"C:/all/Dev-Cpp/MinGW64/lib" -L"C:/all/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -L"C:/Users/7/Desktop/ucheba/графика/freeglut/lib/x64" -static-libgcc -lopengl32 -lfreeglut -lglu32
 INCS     = -I"C:/all/Dev-Cpp/MinGW64/include" -I"C:/all/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/all/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/all/Dev-Cpp/MinGW64/include" -I"C:/all/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/all/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/all/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Users/7/Desktop/ucheba/графика/freeglut/include" -I"C:/Users/7/Desktop/ucheba/графика/glm-0.9.9.8/glm"
@@ -24,8 +24,11 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-1.o: 1.cpp
-	$(CPP) -c 1.cpp -o 1.o $(CXXFLAGS)
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
 
 GraphicObject.o: GraphicObject.cpp
 	$(CPP) -c GraphicObject.cpp -o GraphicObject.o $(CXXFLAGS)
+
+Camera.o: Camera.cpp
+	$(CPP) -c Camera.cpp -o Camera.o $(CXXFLAGS)

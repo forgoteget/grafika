@@ -3,23 +3,24 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/freeglut.h>
+#include <vector>
+#include <glm/glm.hpp>
+using namespace glm;
 
-int colors[4][3]={{0,0,0},{255,255,255},{0,0,255},{255,0,0}};
-int red=147, green=112, blue=219,Currentkey, i=0, timeCount=0;
-const int Qkey = 113;
+int i=1, timeCount=0;
+std::vector<ivec3> teapotColor {{255,255,255},{0,0,255},{255,0,0},{255,255,0},{90,0,90}};
+std::vector<ivec3> color;
+//white blue red yellow purple
 
 void Simulation(int value){
-	if(Currentkey == Qkey){
-		timeCount+=20;
-		if(timeCount == 1200){
-			timeCount = 0;
-			red = colors[i][0];
-			green = colors[i][1];
-			blue = colors[i][2];
-			i++;
-			if(i==4){
-				i = 0;
-			}
+	timeCount+=20;
+	if(timeCount == 1000){
+		timeCount = 0;
+		color.clear();
+		color.push_back(teapotColor[i]);
+		i++;
+		if(i==5){
+			i = 0;
 		}
 	}
 	glutPostRedisplay();
@@ -44,7 +45,9 @@ void Display(void){
 	glLoadIdentity();
 	gluLookAt(5,5,7.5,0,0,0,0,1,0);
 	
-	glColor3ub(red, green, blue);
+	if(color.empty())
+		color.push_back(teapotColor[0]);
+	glColor3ub((int)color[0][0], (int)color[0][1], (int)color[0][2]);
 	glutWireTeapot(1.0);
 	
 	glutSwapBuffers();
@@ -52,20 +55,18 @@ void Display(void){
 
 void KeyboardFunc(unsigned char key, int x, int y){
 	printf("Key code is %i\n", (unsigned int) key);
-	Currentkey = key;
 }
 
 int main(int argc, char* argv[]){
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
-	
 	////////////sozdanie okna///////////////////
 	//verxniy leviy ugol
 	glutInitWindowPosition(200, 200);
 	//razmer okna
 	glutInitWindowSize(600, 600);
 	//sozdanie okna
-	glutCreateWindow("laba1");
+	glutCreateWindow("laba2");
 	
 	///////////callback functions///////////////
 	//vizov pri pererisovke
@@ -78,7 +79,6 @@ int main(int argc, char* argv[]){
 	glutKeyboardFunc(KeyboardFunc);
 	
 	glutMainLoop();
-	
 	
 	return 0;
 }

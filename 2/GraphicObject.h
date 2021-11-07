@@ -26,6 +26,7 @@ class GraphicObject
 		vec3 position;
 		float angle;
 		vec3 color;
+//		GLfloat modelMatrix[16];
 	private:
 		void recalculateModelMatrix();
 }; 

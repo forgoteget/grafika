@@ -5,52 +5,35 @@
 #include <GL/freeglut.h>
 #include <vector>
 #include <glm/glm.hpp>
+#include "GraphicObject.h"
+#include "Camera.h"
 using namespace glm;
-
-int i=1, timeCount=0;
-std::vector<ivec3> teapotColor {{255,255,255},{0,0,255},{255,0,0},{255,255,0},{90,0,90}};
-std::vector<ivec3> color;
-//white blue red yellow purple
+std::vector<GraphicObject> graphicObjects;
+Camera camera;
 
 void Simulation(int value){
-	timeCount+=20;
-	if(timeCount == 1000){
-		timeCount = 0;
-		color.clear();
-		color.push_back(teapotColor[i]);
-		i++;
-		if(i==5){
-			i = 0;
-		}
-	}
 	glutPostRedisplay();
 	glutTimerFunc(20, Simulation, 0);
 }
 
 void Reshape(int w, int h){
 	glViewport(0,0,(GLsizei)w,(GLsizei)h);
-	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(25.0, (float)w/h, 0.2, 70.0);
 }
 
 void Display(void){
-	glClearColor(0.22, 0.88, 0.11, 0.5);
+	glClearColor(0.00, 0.00, 0.00, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
 	glEnable(GL_DEPTH_TEST);
-	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(5,5,7.5,0,0,0,0,1,0);
-	
-	if(color.empty())
-		color.push_back(teapotColor[0]);
-	glColor3ub((int)color[0][0], (int)color[0][1], (int)color[0][2]);
-	glutWireTeapot(1.0);
-	
-	glutSwapBuffers();
+	camera.apply();
+	for (auto& go : graphicObjects) {
+		go.draw();
+	}
+	glutSwapBuffers(); 
 }
 
 void KeyboardFunc(unsigned char key, int x, int y){
@@ -77,6 +60,28 @@ int main(int argc, char* argv[]){
 	glutTimerFunc(20, Simulation, 0);
 	// vizov pri nazhatii na klavishu
 	glutKeyboardFunc(KeyboardFunc);
+	
+	GraphicObject tempGraphicObject;
+	//1
+	tempGraphicObject.setPosition(vec3(4,0,0));
+	tempGraphicObject.setAngle(180);
+	tempGraphicObject.setColor(vec3(255,255,255));
+	graphicObjects.push_back(tempGraphicObject);
+	//2
+	tempGraphicObject.setPosition(vec3(-4,0,0));
+	tempGraphicObject.setAngle(0);
+	tempGraphicObject.setColor(vec3(255,0,0));
+	graphicObjects.push_back(tempGraphicObject);
+	//3
+	tempGraphicObject.setPosition(vec3(0,0,-4));
+	tempGraphicObject.setAngle(270);
+	tempGraphicObject.setColor(vec3(0,255,0));
+	graphicObjects.push_back(tempGraphicObject);
+	//4
+	tempGraphicObject.setPosition(vec3(0,0,4));
+	tempGraphicObject.setAngle(90);
+	tempGraphicObject.setColor(vec3(0,0,255));
+	graphicObjects.push_back(tempGraphicObject);
 	
 	glutMainLoop();
 	
