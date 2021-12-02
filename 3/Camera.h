@@ -11,13 +11,14 @@
 #include <glm/gtc/type_ptr.hpp>
 using namespace glm;
 
-/*
+
 class Camera{
 	public:
 		Camera();
 		void apply();
-};*/
+};
 
+/*
 class Camera
 {
 public:
@@ -36,5 +37,5 @@ private:
 	float angleX;
 	float angleY;
 	vec3 position;
-};
+};*/
 #endif

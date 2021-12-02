@@ -26,7 +26,5 @@ class GraphicObject
 		vec3 position;
 		float angle;
 		vec3 color;
-	private:
-		void recalculateModelMatrix();
 }; 
 #endif

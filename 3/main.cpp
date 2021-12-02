@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include "GraphicObject.h"
 #include "Camera.h"
+#include <iostream>
 using namespace glm;
 std::vector<GraphicObject> graphicObjects;
 Camera camera;
@@ -30,6 +31,8 @@ void Display(void){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	camera.apply();
+//	gluLookAt(10, 15, 17.5, 0, 0, 0, 0, 1, 0);
+//	Camera camera;
 	for (auto& go : graphicObjects) {
 		go.draw();
 	}
@@ -38,6 +41,26 @@ void Display(void){
 
 void KeyboardFunc(unsigned char key, int x, int y){
 	printf("Key code is %i\n", (unsigned int) key);
+	switch (static_cast<char>(key)) {
+	case 'w':
+//		camera.rotateUpDown(5.0);
+		break;
+	case 's':
+//		camera.rotateUpDown(-5.0);
+		break;
+	case 'a':
+//		camera.rotateLeftRight(5.0);
+		break;
+	case 'd':
+//		camera.rotateLeftRight(-5.0);
+		break;
+	case '+':
+//		camera.zoomInOut(0.2);
+		break;
+	case '-':
+//		camera.zoomInOut(-0.2);
+		break;
+	} 
 }
 
 int main(int argc, char* argv[]){
@@ -49,7 +72,7 @@ int main(int argc, char* argv[]){
 	//razmer okna
 	glutInitWindowSize(600, 600);
 	//sozdanie okna
-	glutCreateWindow("laba2");
+	glutCreateWindow("laba3");
 	
 	///////////callback functions///////////////
 	//vizov pri pererisovke

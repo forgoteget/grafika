@@ -28,9 +28,6 @@ vec3 GraphicObject::getColor(){
 	return color;
 }
 
-void GraphicObject::recalculateModelMatrix(){
-}
-
 void GraphicObject::draw(){
 	glPushMatrix();
 	glTranslatef(position[0], position[1], position[2]);
